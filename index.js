@@ -19,6 +19,12 @@ cron.schedule('0 18 * * *', async () => { // 18:00 UTC = 21:00 UTC+3
 console.log(`Scheduled cart cleanup daily at 9 PM ${process.env.TIMEZONE}`);
 console.log('Node.js cron job is running...');
 
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+
 // For testing: uncomment to run immediately
 // (async () => {
 //   await processCustomerCarts();
