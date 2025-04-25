@@ -1,6 +1,10 @@
 require('dotenv').config();
+const express = require('express');
 const cron = require('node-cron');
 const { processCustomerCarts } = require('./cleanup-service');
+
+// Initialize express app
+const app = express();
 
 // Schedule the cleanup daily at 9 PM (UTC+3)
 cron.schedule('0 18 * * *', async () => { // 18:00 UTC = 21:00 UTC+3
@@ -23,7 +27,6 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
 
 // For testing: uncomment to run immediately
 // (async () => {
