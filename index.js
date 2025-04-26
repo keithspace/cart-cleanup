@@ -3,15 +3,14 @@ const express = require('express');
 const cron = require('node-cron');
 const { processCustomerCarts } = require('./cleanup-service');
 
-// Initialize express app
 const app = express();
 
 app.get('/', (req, res) => {
   res.send('Cart Cleanup Service is running.');
 });
 
-// Schedule the cleanup daily at 9 PM (UTC+3)
-cron.schedule('0 18 * * *', async () => { // 18:00 UTC = 21:00 UTC+3
+// Schedule the cleanup daily at 15:45 (3:45 PM)
+cron.schedule('45 15 * * *', async () => { // 15:45 UTC (adjust timezone if needed)
   console.log('Running daily cart cleanup at', new Date().toISOString());
   try {
     const result = await processCustomerCarts();
@@ -21,10 +20,10 @@ cron.schedule('0 18 * * *', async () => { // 18:00 UTC = 21:00 UTC+3
   }
 }, {
   scheduled: true,
-  timezone: process.env.TIMEZONE
+  timezone: process.env.TIMEZONE // Ensure TIMEZONE is set (e.g., "Europe/Istanbul")
 });
 
-console.log(`Scheduled cart cleanup daily at 9 PM ${process.env.TIMEZONE}`);
+console.log(`Scheduled cart cleanup daily at 14:50 (${process.env.TIMEZONE})`);
 console.log('Node.js cron job is running...');
 
 app.get('/clean', async (req, res) => {
