@@ -14,7 +14,7 @@ async function returnProductQuantities(products) {
     productRefs.push(productRef);
     
     batch.update(productRef, {
-      stock: admin.firestore.FieldValue.increment(product.quantity),
+      quantity: admin.firestore.FieldValue.increment(product.quantity),
       lastRestocked: admin.firestore.FieldValue.serverTimestamp()
     });
   }
