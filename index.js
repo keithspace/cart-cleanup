@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 // Schedule the cleanup daily at 15:45 (3:45 PM)
-cron.schedule('45 15 * * *', async () => { // 15:45 UTC (adjust timezone if needed)
+cron.schedule('50 14 * * *', async () => { // 15:45 UTC (adjust timezone if needed)
   console.log('Running daily cart cleanup at', new Date().toISOString());
   try {
     const result = await processCustomerCarts();
